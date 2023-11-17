@@ -24,19 +24,22 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        User::create([
-            'name' => fake()->name(),
-            'email' => "a@a.a",
-            'email_verified_at' => now(),
-            'role' => "Admin",
-            'password' => Hash::make("a@a.a"),
-            'remember_token' => Str::random(10),
-        ]);
-        Keyword::factory(20)->create();
-        Article::factory(100)->create();
+        try {
+            User::create([
+                'name' => fake()->name(),
+                'email' => "a@a.a",
+                'email_verified_at' => now(),
+                'role' => "Admin",
+                'password' => Hash::make("a@a.a"),
+                'remember_token' => Str::random(10),
+            ]);
+            Keyword::factory(20)->create();
+            Article::factory(100)->create();
 
-        $keywordIds = Keyword::all("id")->toArray();
-        $articles = Article::all();
+            $keywordIds = Keyword::all("id")->toArray();
+            $articles = Article::all();
+        } catch (\Exception $exception) {
 
+        }
     }
 }
